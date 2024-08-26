@@ -2,6 +2,51 @@
 <html>
 <head>
     <title>Expense List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        a:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li a {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+        }
+        li a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>Expense List</h1>
@@ -9,9 +54,11 @@
     <ul>
         {% for expense in expenses %}
             <li>
-                {{ expense.description }} - {{ expense.amount }} - {{ expense.category }} - {{ expense.datetime }}
-                <a href="{% url 'expense_edit' expense.pk %}">Edit</a>
-                <a href="{% url 'expense_delete' expense.pk %}">Delete</a>
+                <span>{{ expense.description }} - {{ expense.amount }} - {{ expense.category }} - {{ expense.datetime }}</span>
+                <span>
+                    <a href="{% url 'expense_edit' expense.pk %}">Edit</a>
+                    <a href="{% url 'expense_delete' expense.pk %}">Delete</a>
+                </span>
             </li>
         {% endfor %}
     </ul>
