@@ -5,82 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        *:before,
+        *:after {
+            padding: 0;
             margin: 0;
+            box-sizing: border-box;
         }
+        body {
+            background-color: #080710;
+        }
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
+
         .container {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+            height: 460px;
+            width: 340px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
         }
         h2 {
-            margin-bottom: 1.5rem;
-            color: #333;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            color: #fff;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
+
+        label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
         }
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        input {
+            display: block;
+            height: 50px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
         }
         button {
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
+            width: 48%;
             background-color: #007bff;
-            color: #fff;
-            font-size: 1rem;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            color: #fff;
             transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
-        .error {
-            color: red;
-            margin-top: 1rem;
-        }
         .signup-btn {
-            display: block;
-            margin-top: 1rem;
-            padding: 0.75rem;
+            width: 48%;
+            padding: 15px 0;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             background-color: #28a745;
             color: #fff;
             text-align: center;
             cursor: pointer;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 18px;
+            font-weight: 600;
             transition: background-color 0.3s ease;
         }
         .signup-btn:hover {
             background-color: #218838;
         }
+        .error {
+            color: red;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
     <div class="container">
         <h2>Login</h2>
         <form method="post">
@@ -93,14 +146,16 @@
                 <label for="id_password">Password:</label>
                 {{ form.password }}
             </div>
-            <button type="submit">Login</button>
+            <div class="button-container">
+                <button type="submit">Login</button>
+                <a class="signup-btn" href="{% url 'signup' %}">SIGN UP</a>
+            </div>
         </form>
         {% if form.non_field_errors %}
             <div class="error">
                 {{ form.non_field_errors }}
             </div>
         {% endif %}
-        <a class="signup-btn" href="{% url 'signup' %}">Sign Up</a>
     </div>
 </body>
 </html>
