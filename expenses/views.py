@@ -4,6 +4,7 @@ from .forms import ExpenseForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 @login_required
 def expense_list(request):
@@ -57,3 +58,14 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Automatically log in the user after signing up
+            return redirect('expense_list')  # Redirect to a home page or wherever you want
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
