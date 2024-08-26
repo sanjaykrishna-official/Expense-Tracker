@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 @login_required
 def expense_list(request):
     expenses = Expense.objects.filter(user=request.user)
-    return render(request, 'expense_list.html', {'expenses': expenses})
+    return render(request, 'index.html', {'expenses': expenses})
 
 @login_required
 def expense_add(request):
@@ -19,7 +19,7 @@ def expense_add(request):
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
-            return redirect('expense_list')
+            return redirect('index')
     else:
         form = ExpenseForm()
     return render(request, 'expense_add.html', {'form': form})
@@ -31,7 +31,7 @@ def expense_edit(request, pk):
         form = ExpenseForm(request.POST, instance=expense)
         if form.is_valid():
             form.save()
-            return redirect('expense_list')
+            return redirect('index')
     else:
         form = ExpenseForm(instance=expense)
     return render(request, 'expense_edit.html', {'form': form})
@@ -41,7 +41,7 @@ def expense_delete(request, pk):
     expense = get_object_or_404(Expense, pk=pk)
     if request.method == 'POST':
         expense.delete()
-        return redirect('expense_list')
+        return redirect('index')
     return render(request, 'expense_confirm_delete.html', {'expense': expense})
 
 def login_view(request):
@@ -50,7 +50,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('expense_list')
+            return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -65,7 +65,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Automatically log in the user after signing up
-            return redirect('expense_list')  # Redirect to a home page or wherever you want
+            return redirect('index')  # Redirect to a home page or wherever you want
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
