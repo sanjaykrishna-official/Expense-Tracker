@@ -4,47 +4,62 @@
     <title>Expense List</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #f0f2f5; /* Match the background color */
         }
         h1 {
             color: #333;
             text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         a {
             text-decoration: none;
-            color: white;
-            background-color: #28a745;
+            color: #fff;
+            background-color: #007bff;
             padding: 10px 15px;
             border-radius: 5px;
             margin: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 14px;
         }
         a:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 20px 0;
         }
         li {
             background-color: #fff;
             margin: 10px 0;
             padding: 15px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+        li span {
+            font-size: 14px; /* Ensure text size matches */
+        }
         li a {
             margin-left: 10px;
             padding: 5px 10px;
-            background-color: #007bff;
+            background-color: #28a745;
+            font-size: 12px;
         }
         li a:hover {
-            background-color: #0056b3;
+            background-color: #218838;
+        }
+        /* Aligning the Logout button to the right */
+        .logout {
+            display: block;
+            text-align: right;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -62,6 +77,8 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'logout' %}">Logout</a>
+    <div class="logout">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
 </body>
 </html>

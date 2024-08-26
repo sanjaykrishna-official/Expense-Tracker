@@ -32,14 +32,19 @@
         button:hover {
             background-color: #c9302c;
         }
-        a {
+        .cancel-button {
+            color: #f0f0f0;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
             display: inline-block;
             margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
         }
-        a:hover {
-            text-decoration: underline;
+        .cancel-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -50,6 +55,6 @@
         {% csrf_token %}
         <button type="submit">Confirm</button>
     </form>
-    <a href="{% url 'expense_list' %}">Cancel</a>
+    <a href="{% url 'expense_list' %}" class="cancel-button">Cancel</a>
 </body>
 </html>
